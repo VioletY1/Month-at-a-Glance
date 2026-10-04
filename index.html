@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Month at a glance</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="app-shell">
+    <header class="topbar">
+      <div class="brand"><span class="brand-mark">✦</span><span>Month at a glance</span></div>
+      <div class="topbar-right"><span class="saved-status"><i></i> All changes saved</span><button id="share-button" class="share-button">Share URL</button><button class="icon-button" aria-label="Settings">⚙</button></div>
+    </header>
+
+    <section class="workspace">
+      <div class="calendar-column">
+        <div class="calendar-heading">
+          <div>
+            <p id="month-eyebrow" class="eyebrow">Your month</p>
+            <h1 id="month-title">September <span>2026</span></h1>
+          </div>
+          <div class="month-controls"><button id="prev-month" aria-label="Previous month">←</button><button id="today-button">Today</button><button id="next-month" aria-label="Next month">→</button></div>
+        </div>
+        <div class="calendar-card">
+          <div class="weekdays"><span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span></div>
+          <div id="calendar-grid" class="calendar-grid" aria-label="Monthly calendar"></div>
+        </div>
+        <div class="calendar-footer"><span class="shortcut-hint"><kbd>N</kbd> new event</span></div>
+      </div>
+
+      <aside class="quick-panel">
+        <section class="quick-add panel-section">
+          <div class="section-label"><span class="step">01</span><div><h2>Add an event</h2></div></div>
+          <form id="quick-form" class="quick-form">
+            <label for="quick-title">What is happening?</label>
+            <input id="quick-title" class="event-title-input" autocomplete="off" placeholder="Art club" required />
+            <select id="quick-label" class="event-label-select" aria-label="Event label"><option value="personal">Personal</option><option value="work">Work</option></select>
+            <div class="picker-labels"><span>Date</span><span>Time</span></div>
+            <div class="picker-row"><input id="quick-date" type="date" required /><div class="clock-picker"><select id="quick-hour" size="3" aria-label="Choose hour"></select><span class="clock-colon">:</span><select id="quick-minute" size="3" aria-label="Choose minute"></select><select id="quick-ampm" class="ampm-picker" size="2" aria-label="Choose AM or PM"><option>AM</option><option selected>PM</option></select></div></div>
+            <p class="clock-readout" aria-live="polite">4:00 PM</p>
+            <label class="repeat-toggle"><input id="quick-repeat" type="checkbox" /> Repeat this event</label>
+            <div id="quick-repeat-options" class="repeat-options hidden">
+              <label class="repeat-until-label" for="quick-repeat-start">Start repeating</label><input id="quick-repeat-start" type="date" />
+              <select id="quick-repeat-day" aria-label="Repeat day"><option value="1">Every Monday</option><option value="2">Every Tuesday</option><option value="3">Every Wednesday</option><option value="4">Every Thursday</option><option value="5">Every Friday</option><option value="6">Every Saturday</option><option value="0">Every Sunday</option></select>
+              <label class="repeat-until-label" for="quick-repeat-until">Stop repeating (optional)</label><input id="quick-repeat-until" type="date" />
+            </div>
+            <div class="input-row"><button type="submit">Add event <span>↵</span></button></div>
+            <p id="quick-feedback" class="feedback" aria-live="polite"></p>
+          </form>
+        </section>
+
+        <section class="panel-section move-section">
+          <div class="section-label"><span class="step">02</span><div><h2>Change a date</h2></div></div>
+          <form id="move-form" class="move-form"><select id="move-event" aria-label="Event to move"></select><div class="move-row"><input id="move-date" type="date" /><button class="outline-button" type="submit">Move</button></div><p id="move-feedback" class="feedback" aria-live="polite"></p></form>
+        </section>
+
+        <section class="panel-section manage-section"><div class="up-next-heading"><div><h2>Manage events</h2></div></div><div id="manage-list" class="manage-list"></div><div class="repeat-manage-heading">Repeating schedules</div><div id="repeat-manage-list" class="manage-list"></div><div class="repeat-manage-heading tag-heading">Tags</div><form id="tag-form" class="tag-form"><input id="new-tag" placeholder="Add a tag" maxlength="18"/><button class="manage-action" type="submit">Add</button></form><div id="tag-list" class="tag-list"></div></section>
+        <section class="up-next panel-section"><div class="up-next-heading"><p class="eyebrow">Coming up</p><button id="clear-completed" class="text-button">Clear done</button></div><div id="up-next-list"></div></section>
+      </aside>
+    </section>
+  </main>
+  <dialog id="share-dialog" class="share-dialog"><form method="dialog"><div class="dialog-heading"><div><p class="eyebrow">Share view</p><h2>Choose what to show</h2></div><button class="dialog-close" value="cancel" aria-label="Close">×</button></div><p class="dialog-copy">Hidden tags stay private and won’t change your calendar.</p><div id="share-tag-list" class="share-tag-list"></div><div class="dialog-actions"><button id="copy-share-url" class="dark-button" value="default">Copy share URL</button></div><p id="share-feedback" class="feedback" aria-live="polite"></p></form></dialog>
+  <div id="toast" class="toast" role="status"></div>
+  <script src="script.js"></script>
+</body>
+</html>
